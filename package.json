@@ -1,8 +1,9 @@
 {
   "name": "messenger-message-count",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "",
   "main": "index.js",
+  "repository": "https://github.com/tothambrus11/messenger-message-count",
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
