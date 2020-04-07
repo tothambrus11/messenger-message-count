@@ -18,6 +18,7 @@ function newLogin() {
         let password = await new Promise(resolve => {
             rl.question("Enter your password: ", (answer) => resolve(answer));
         });
+        rl.close();
 
         login({email, password, forceLogin: true}, (err, api) => {
             if (err) reject(err);
@@ -44,13 +45,17 @@ function autoLogin() {
         try {
             appState = readState();
         } catch (e) {
-            newLogin().then((r) => resolve(r)).catch((e) => reject(e));
+            if(!appState){
+                newLogin().then((r) => resolve(r)).catch((e) => reject(e));
+            }
         }
 
-        login({appState, forceLogin: true}, (err, api) => {
-            if (err) reject(err);
-            else resolve(api);
-        });
+        if(appState){
+            login({appState, forceLogin: true}, (err, api) => {
+                if (err) reject(err);
+                else resolve(api);
+            });
+        }
     });
 }
 
